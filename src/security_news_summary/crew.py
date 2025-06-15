@@ -3,6 +3,7 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from crewai_tools import ScrapeWebsiteTool
 from typing import List
+from .tools import TableScraperTool
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
@@ -25,14 +26,15 @@ class SecurityNewsSummary():
         return Agent(
             config=self.agents_config['researcher'], # type: ignore[index]
             verbose=True,
-            tools=[ScrapeWebsiteTool()]
+            tools=[ScrapeWebsiteTool(), TableScraperTool()]
         )
 
     # @agent
-    # def reporting_analyst(self) -> Agent:
+    # def fact_checker(self) -> Agent:
     #     return Agent(
-    #         config=self.agents_config['reporting_analyst'], # type: ignore[index]
-    #         verbose=True
+    #         config=self.agents_config['fact_checker'], # type: ignore[index]
+    #         verbose=True,
+    #         tools=[ScrapeWebsiteTool()]
     #     )
 
     # To learn more about structured task outputs,
@@ -46,10 +48,10 @@ class SecurityNewsSummary():
         )
 
     # @task
-    # def reporting_task(self) -> Task:
+    # def fact_check_task(self) -> Task:
     #     return Task(
-    #         config=self.tasks_config['reporting_task'], # type: ignore[index]
-    #         output_file='report.md'
+    #         config=self.tasks_config['fact_check_task'], # type: ignore[index]
+    #         output_file='cves.md'
     #     )
 
     @crew
