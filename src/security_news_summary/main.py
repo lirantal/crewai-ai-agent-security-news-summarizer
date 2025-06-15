@@ -18,8 +18,7 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
+        'security_vulnerabilities_url': 'https://security.snyk.io/vuln/npm'
     }
     
     try:
