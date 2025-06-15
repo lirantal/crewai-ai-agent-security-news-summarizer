@@ -1,3 +1,3 @@
-- https://security.snyk.io/vuln/SNYK-JS-KIBANA-10337950
-- https://security.snyk.io/vuln/SNYK-JS-KIBANA-10339388
-- https://security.snyk.io/vuln/SNYK-JS-KIBANA-10339019
+- **@misskey-dev/summaly** found vulnerable to CWE-346 [Origin Validation Error](https://security.snyk.io/vuln/SNYK-JS-MISSKEYDEVSUMMALY-10350356), 13 Jun 2025
+- **kibana** found vulnerable to CVE-2024-52974 [Allocation of Resources Without Limits or Throttling](https://security.snyk.io/vuln/SNYK-JS-KIBANA-10337950), 12 Jun 2025
+- **kibana** found vulnerable to CVE-2024-43706 [Missing Authorization](https://security.snyk.io/vuln/SNYK-JS-KIBANA-10339388), 12 Jun 2025

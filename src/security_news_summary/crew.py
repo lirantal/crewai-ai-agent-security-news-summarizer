@@ -22,37 +22,37 @@ class SecurityNewsSummary():
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
+    def cve_curator(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
+            config=self.agents_config['cve_curator'], # type: ignore[index]
             verbose=True,
             tools=[ScrapeWebsiteTool(), TableScraperTool()]
         )
 
-    # @agent
-    # def fact_checker(self) -> Agent:
-    #     return Agent(
-    #         config=self.agents_config['fact_checker'], # type: ignore[index]
-    #         verbose=True,
-    #         tools=[ScrapeWebsiteTool()]
-    #     )
+    @agent
+    def cve_researcher(self) -> Agent:
+        return Agent(
+            config=self.agents_config['cve_researcher'], # type: ignore[index]
+            verbose=True,
+            tools=[ScrapeWebsiteTool()]
+        )
 
     # To learn more about structured task outputs,
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
-    def research_task(self) -> Task:
+    def cve_curation_task(self) -> Task:
         return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
+            config=self.tasks_config['cve_curation_task'], # type: ignore[index]
             output_file='cves.md'
         )
 
-    # @task
-    # def fact_check_task(self) -> Task:
-    #     return Task(
-    #         config=self.tasks_config['fact_check_task'], # type: ignore[index]
-    #         output_file='cves.md'
-    #     )
+    @task
+    def cve_research_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['cve_research_task'], # type: ignore[index]
+            output_file='cves.md'
+        )
 
     @crew
     def crew(self) -> Crew:
