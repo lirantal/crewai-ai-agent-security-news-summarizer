@@ -29,17 +29,37 @@ cve_research_task:
     
     expected_output: >
       A total of 3 CVEs, each formatted as a bullet point in the following markdown format (strict markdown formatting for example links should not have space between the [] and () chars):
-      ```
+      <task_output_example>
       **@trpc/server** found vulnerable to CVE-2025-43855 [Uncaught Exception](https://security.snyk.io/vuln/SNYK-JS-TRPCSERVER-10060256), 24 Apr 2025
-      ```
+      </task_output_example>
     agent: cve_researcher
-  
-  # fact_check_task:
-  #   description: >
-  #     Review the context you got from the researcher and verify if the information is correct.
-  #     If needed, make modifications to the information found by the researcher.
-  #   expected_output: >
-  #     If the information is incorrect, you should correct it.
-  #     Otherwise, your output should be the same as the input.
-  #   agent: fact_checker
+
+article_summarization_task:
+    description: >  
+      Use the FileReadTool to read the Markdown file `urls.md` for your source of input data to work with.
+      
+      That markdown file that contains a list of section headers that each represent a story.
+      Each of the section headers in that file has a bullet list of URLs that are related to the story.
+
+      For each section header story you should visit all the URLs pages, extract their content and create a concise summary that highlights the most important
+      aspects relevant to Node.js and JavaScript security for that particular story.
+      The summary should be informative and valuable for the Node.js security community.
+      
+      Focus on:
+      1) Key security implications
+      2) Impact on the Node.js ecosystem
+      3) Any actionable insights or recommendations
+      4) Important technical details that security professionals should know
+    
+    expected_output: >
+      A markdown formatted list of article summaries, each in the following format:
+      <output_format>
+      [Article Title](article_url) - Concise summary that captures the key points and relevance to Node.js security.
+      </output_format>
+      
+      Example:
+      <output_example>
+      [Can npx run with Node.js permission model?](https://x.com/_rafaelgss/status/1931334767355502996) - Rafael Gonzaga shows and provides a bash alias to demonstrate how to run `npx` with the Node.js permission model, which is a great way to run untrusted code in a secure manner.
+      </output_example>
+    agent: article_summarizer
   

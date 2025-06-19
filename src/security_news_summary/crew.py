@@ -1,7 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
-from crewai_tools import ScrapeWebsiteTool
+from crewai_tools import ScrapeWebsiteTool, FileReadTool
 from typing import List
 from .tools import TableScraperTool
 # If you want to run a snippet of code before or after the crew starts,
@@ -24,7 +24,7 @@ class SecurityNewsSummary():
     @agent
     def cve_curator(self) -> Agent:
         return Agent(
-            config=self.agents_config['cve_curator'], # type: ignore[index]
+            config=self.agents_config['cve_curator'],
             verbose=True,
             tools=[ScrapeWebsiteTool(), TableScraperTool()]
         )
@@ -32,9 +32,17 @@ class SecurityNewsSummary():
     @agent
     def cve_researcher(self) -> Agent:
         return Agent(
-            config=self.agents_config['cve_researcher'], # type: ignore[index]
+            config=self.agents_config['cve_researcher'],
             verbose=True,
             tools=[ScrapeWebsiteTool()]
+        )
+
+    @agent
+    def article_summarizer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['article_summarizer'],
+            verbose=True,
+            tools=[FileReadTool(), ScrapeWebsiteTool()]
         )
 
     # To learn more about structured task outputs,
@@ -43,15 +51,23 @@ class SecurityNewsSummary():
     @task
     def cve_curation_task(self) -> Task:
         return Task(
-            config=self.tasks_config['cve_curation_task'], # type: ignore[index]
-            output_file='cves.md'
+            config=self.tasks_config['cve_curation_task'],
         )
 
     @task
     def cve_research_task(self) -> Task:
         return Task(
-            config=self.tasks_config['cve_research_task'], # type: ignore[index]
+            config=self.tasks_config['cve_research_task'],
             output_file='cves.md'
+        )
+
+    @task
+    def article_summarization_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['article_summarization_task'],
+            async_execution=True,
+            output_file='article_summaries.md',
+            tools=[FileReadTool(), ScrapeWebsiteTool()]
         )
 
     @crew
