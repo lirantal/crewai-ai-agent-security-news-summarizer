@@ -12,6 +12,13 @@ First, if you haven't already, install uv:
 pip install uv
 ```
 
+Then enable uv as part of the project:
+
+```bash
+uv tool install crewai
+uv tool update-shell
+```
+
 Next, navigate to your project directory and install the dependencies:
 
 (Optional) Lock the dependencies and install them by using the CLI command:
