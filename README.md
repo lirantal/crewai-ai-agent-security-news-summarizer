@@ -59,3 +59,7 @@ For support, questions, or feedback regarding the SecurityNewsSummary Crew or cr
 - [Chat with our docs](https://chatg.pt/DWjSBZn)
 
 Let's create wonders together with the power and simplicity of crewAI.
+
+## Contributing
+
+Please consult [CONTRIBUTING](./CONTRIBUTING.md) for guidelines on contributing to this project.
